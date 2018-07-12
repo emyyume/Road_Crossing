@@ -8,6 +8,7 @@ using namespace std;
 
 class Console {
 public:
+	static void BackgroundMusic();
 	static void FixConsoleWindow();
 	static void ShowConsoleCursor(const bool &choose);
 	static void GotoXY(const int &x, const int &y);
@@ -18,8 +19,10 @@ public:
 	static void MainMenu();
 	static int ProcessMainMenu();
 	static void NewGameMenu();
+	static void SaveGameMenu();
 	static void LoadGameMenu();
 	static void SettingMenu();
 	static void ExitMenu();
 	static bool Accept();
+	static void GameOverMenu();
 };

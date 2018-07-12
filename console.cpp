@@ -1,5 +1,8 @@
 #include "console.h"
 
+void Console::BackgroundMusic() {
+	PlaySound(TEXT("PatakasWorld.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
 void Console::FixConsoleWindow() {
 	HWND console_window = GetConsoleWindow();
 	LONG style = GetWindowLong(console_window, GWL_STYLE);
@@ -132,6 +135,29 @@ void Console::NewGameMenu() {
 	Button("Back", 10, 1, 32, 22);
 	Button("GO", 10, 1, 76, 22);
 }
+void Console::SaveGameMenu() {
+	Border(60, 20, 29, 4);
+
+	string text = "Save Game";
+	SetText(text, 60 - text.length() / 2, 2);
+
+	Border(20, 3, 32, 5);
+	SetText("Save-data 1", 34, 6);
+	Border(20, 3, 32, 11);
+	SetText("Save-data 3", 34, 12);
+	Border(20, 3, 32, 17);
+	SetText("Save-data 5", 34, 18);
+
+	Border(20, 3, 66, 5);
+	SetText("Save-data 2", 68, 6);
+	Border(20, 3, 66, 11);
+	SetText("Save-data 4", 68, 12);
+	Border(20, 3, 66, 17);
+	SetText("Save-data 6", 68, 18);
+
+	Button("Back", 10, 1, 32, 22);
+	Button("Save", 10, 1, 76, 22);
+}
 void Console::LoadGameMenu() {
 	Border(60, 20, 29, 4);
 
@@ -163,6 +189,9 @@ void Console::SettingMenu() {
 
 	SetText("New player name:", 33, 6);
 	Border(32, 1, 53, 5);
+
+	SetText("Change level:", 33, 10);
+	Border(32, 1, 53, 9);
 
 	Button("Back", 10, 1, 32, 22);
 	Button("Save", 10, 1, 76, 22);
@@ -201,4 +230,13 @@ bool Console::Accept() {
 	}
 
 	return x == 74;
+}
+void Console::GameOverMenu() {
+	Border(30, 5, 44, 12);
+
+	string text = "GAME OVER! Retry?";
+	SetText(text, 60 - text.length() / 2, 10);
+
+	Button("Retry~", 10, 1, 47, 14);
+	Button("Exit", 10, 1, 61, 14);
 }

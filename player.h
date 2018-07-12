@@ -4,17 +4,18 @@
 
 class Player {
 public:
-	Player() = default;
-	Player(const int &x, const int &y);
+	Player();
 	void Display() const;
 	void Clear() const;
 	void Up();
 	void Down();
 	void Left();
 	void Right();
-	bool Impact(const Vehicle* &vehicle);
-	bool Impact(const Animal* &animal);
+	bool Impact(const Vehicle &vehicle);
+	void EditPlayerName(const string &new_name);
+	string GetName() const;
 private:
 	int _x, _y;
 	bool _alive;
+	string _name;
 };
