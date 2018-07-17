@@ -5,11 +5,8 @@ class Dinosaur :public Animal {
 public:
 	Dinosaur() = default;
 	Dinosaur(const int &x);
-	Dinosaur(const int &x, const int &y);
 	void Display() const;
-	void Clear() const;
-	void Move();
+	void Remove() const;
+	void Move(const int &level);
 	bool Impact(const int &x, const int &y) const;
-private:
-
 };

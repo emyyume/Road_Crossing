@@ -1,22 +1,18 @@
 #include "vehicle.h"
 
-Vehicle::Vehicle(const int &x):_x(x), _y(18){}
 Vehicle::Vehicle(const int &x, const int &y) :_x(x), _y(y) {}
 
 void Vehicle::Move(const int &level) {
-	int speed = 0;
 	switch (level) {
-	case 1: speed = 1000; break;
-	case 2: speed = 900; break;
-	case 3: speed = 800; break;
-	case 4: speed = 700; break;
-	case 5: speed = 600; break;
-	case 6: speed = 500; break;
-	case 7: speed = 400; break;
-	case 8: speed = 300; break;
-	case 9: speed = 200; break;
-	case 10: speed = 100; break;
-	default: speed = 1000;
+	case 1: Sleep(10); break;
+	case 2: Sleep(9); break;
+	case 3: Sleep(8); break;
+	case 4: Sleep(7); break;
+	case 5: Sleep(6); break;
+	case 6: Sleep(5); break;
+	case 7: Sleep(4); break;
+	case 8: Sleep(3); break;
+	case 9: Sleep(2); break;
+	case 10: Sleep(1); break;
 	}
-	Sleep(speed);
 }

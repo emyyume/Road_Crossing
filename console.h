@@ -25,4 +25,5 @@ public:
 	static void ExitMenu();
 	static bool Accept();
 	static void GameOverMenu();
+	static void WinMenu();
 };

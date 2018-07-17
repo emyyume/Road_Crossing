@@ -1,8 +1,6 @@
 #include "player.h"
 
-Player::Player() : _x(60), _y(25), _alive(true) {
-	this->Display();
-}
+Player::Player() : _x(60), _y(25), _alive(true), _name("New player") {}
 
 void Player::Display() const {
 	Console::GotoXY(this->_x, this->_y), cout << (char)220;
@@ -48,4 +46,7 @@ void Player::EditPlayerName(const string &new_name) {
 }
 string Player::GetName() const {
 	return this->_name;
+}
+bool Player::IsFinish() const {
+	return this->_y <= 2;
 }

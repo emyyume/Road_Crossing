@@ -240,3 +240,12 @@ void Console::GameOverMenu() {
 	Button("Retry~", 10, 1, 47, 14);
 	Button("Exit", 10, 1, 61, 14);
 }
+void Console::WinMenu() {
+	Border(30, 5, 44, 12);
+
+	string text = "You are winner! Do you want to play the next level?";
+	SetText(text, 60 - text.length() / 2, 10);
+
+	Button("Next", 10, 1, 47, 14);
+	Button("Exit", 10, 1, 61, 14);
+}

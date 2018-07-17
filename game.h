@@ -7,6 +7,7 @@
 #include <vector>
 #include <thread>
 #include <fstream>
+#include <mutex>
 
 class Game {
 public:
@@ -19,8 +20,10 @@ public:
 	void LoadGame();
 	void Setting();
 	bool Exit();
+	bool Win();
 	bool GameOver();
-	void AllMove();
+	void ResetGame();
+	void AllMove(const int &level);
 	void Stop(thread* sub_thread);
 private:
 	Player* _player;
@@ -28,6 +31,7 @@ private:
 	vector<Animal*> _animals;
 	bool STOP;
 	int _level;
+	mutex _mutex;
 	void EachDataSaved(ifstream &fin, const int &number) const;
 	void PrintSaveData() const;
 	void LoadData(const int &number);

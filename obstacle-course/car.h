@@ -5,11 +5,8 @@ class Car :public Vehicle {
 public:
 	Car() = default;
 	Car(const int &x);
-	Car(const int &x, const int &y);
 	void Display() const;
-	void Clear() const;
-	void Move();
+	void Remove() const;
+	void Move(const int &level);
 	bool Impact(const int &x, const int &y) const;
-private:
-
 };

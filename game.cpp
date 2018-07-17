@@ -111,8 +111,59 @@ void Game::DrawMap() const {
 void Game::StartGame() {
 	system("cls");
 	this->DrawMap();
+	Console::GotoXY(0, 29), cout << "Player: " << this->_player->GetName();
+	Console::GotoXY(110, 29), cout << "Level: " << this->_level;
+	string text = "Start Here!!!"; Console::SetText(text, 60 - text.length() / 2, 29);
+	text = "Finish Here!!!"; Console::SetText(text, 60 - text.length() / 2, 0);
 
-	_getwch();
+	for (int i = 0; i < 120; i += 20)
+		this->_vehicles.push_back(new Car(i));
+	for (int i = 114; i > 0; i -= 20)
+		this->_vehicles.push_back(new Truck(i));
+	for (int i = 0; i < 120; i += 20)
+		this->_animals.push_back(new Dinosaur(i));
+	for (int i = 114; i > 0; i -= 20)
+		this->_animals.push_back(new Bird(i));
+
+	thread lane_running(&Game::AllMove, this, this->_level);
+
+	this->_player->Display();
+	while (true) {
+		if (_kbhit()) {
+			char key = _getch();
+			key = toupper((int)key);
+			switch (key) {
+			case 72: case 'W':
+				this->_player->Up();
+				break;
+			case 80: case 'S':
+				this->_player->Down();
+				break;
+			case 75: case 'A':
+				this->_player->Left();
+				break;
+			case 77: case 'D':
+				this->_player->Right();
+				break;
+			case 13:
+				system("cls");
+				this->STOP = true;
+				this->Stop(&lane_running);
+				break;
+			}
+			if (this->_player->IsFinish()) {
+				system("cls");
+				this->STOP = true;
+				this->Stop(&lane_running);
+				if (this->Win()) {
+					this->ResetGame();
+					++this->_level;
+					this->StartGame();
+				}
+				else return;
+			}
+		}
+	}
 }
 
 bool Game::NewGame() {
@@ -296,6 +347,34 @@ bool Game::Exit() {
 
 	return x == 59;
 }
+bool Game::Win() {
+	system("cls");
+	Console::WinMenu();
+
+	int x = 45;
+	Console::Choose(x, 15);
+
+	while (_getch() != 13) {
+		if (_kbhit()) {
+			char key = _getch();
+			switch (key) {
+			case 75:
+				if (x == 59) {
+					Console::GotoXY(x, 15); cout << ' ';
+					Console::Choose(x -= 14, 15);
+				}
+				break;
+			case 77:
+				if (x == 45) {
+					Console::GotoXY(x, 15); cout << ' ';
+					Console::Choose(x += 14, 15);
+				}
+			}
+		}
+	}
+
+	return x == 45;
+}
 bool Game::GameOver() {
 	system("cls");
 	Console::GameOverMenu();
@@ -324,9 +403,26 @@ bool Game::GameOver() {
 
 	return x == 59;
 }
+void Game::ResetGame() {
+	for (auto &i : this->_vehicles)
+		delete i;
+	for (auto &i : this->_animals)
+		delete i;
+}
 
-void Game::AllMove() {
-
+void Game::AllMove(const int &level) {
+	while (!STOP) {
+		for (auto &i : this->_vehicles) {
+			this->_mutex.lock();
+			i->Move(level);
+			this->_mutex.unlock();
+		}
+		for (auto &i : this->_animals) {
+			this->_mutex.lock();
+			i->Move(level);
+			this->_mutex.unlock();
+		}
+	}
 }
 void Game::Stop(thread* sub_thread) {
 	system("cls");

@@ -5,11 +5,8 @@ class Bird :public Animal {
 public:
 	Bird() = default;
 	Bird(const int &x);
-	Bird(const int &x, const int &y);
 	void Display() const;
-	void Clear() const;
-	void Move();
+	void Remove() const;
+	void Move(const int &level);
 	bool Impact(const int &x, const int &y) const;
-private:
-
 };

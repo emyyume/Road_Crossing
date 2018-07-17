@@ -14,6 +14,7 @@ public:
 	bool Impact(const Vehicle &vehicle);
 	void EditPlayerName(const string &new_name);
 	string GetName() const;
+	bool IsFinish() const;
 private:
 	int _x, _y;
 	bool _alive;

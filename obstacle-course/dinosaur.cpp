@@ -1,7 +1,6 @@
 #include "dinosaur.h"
 
 Dinosaur::Dinosaur(const int &x) :Animal(x, 13) {}
-Dinosaur::Dinosaur(const int &x, const int &y) : Animal(x, y) {}
 
 void Dinosaur::Display() const {
 	char block = (char)219;
@@ -17,16 +16,17 @@ void Dinosaur::Display() const {
 	for (int i = 0; i < 2; ++i)
 			cout << block;
 }
-void Dinosaur::Clear() const {
+void Dinosaur::Remove() const {
 	Console::GotoXY(this->_x, this->_y), cout << "    ";
 	Console::GotoXY(this->_x - 1, this->_y - 1), cout << "   ";
-	Console::GotoXY(this->_x - 1, this->_y - 2), cout << ' ';
+	Console::GotoXY(this->_x - 1, this->_y - 2), cout << "  ";
 }
-void Dinosaur::Move() {
-	this->Display();
-	Sleep(500);
-	this->Clear();
-	this->_x -= 5;
+void Dinosaur::Move(const int &level) {
+	Animal::Move(level);
+	this->Remove();
+	if (this->_x < 2)
+		this->_x = 114;
+	else --this->_x;
 	this->Display();
 }
 bool Dinosaur::Impact(const int &x, const int &y) const {
