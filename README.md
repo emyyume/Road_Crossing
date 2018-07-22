@@ -60,3 +60,58 @@ switch() {
 //4 tuỳ chọn ngoài màn hình chính.
 ```
 
+## Các methods trong `console.h`
+
+```cpp
+static void BackgroundMusic();
+//Hàm này chèn nhạc nền, lưu ý là mỗi bài nhạc sẽ phải viết một hàm riêng thì hàm này không biết cho nhận tham số kiểu gì. Lưu ý nữa là chỉ chấp nhận file WAV.
+```
+
+```cpp
+static void FixConsoleWindow();
+//Hàm này sẽ fix lại màn hình k cho phóng to thu nhỏ gì hết, đảm bảo giao diện không bị sắp xếp lung tung.
+```
+
+```cpp
+static void ShowConsoleCursor(const bool &choose);
+//Hàm này để ẩn / hiện con nháy trong quá trình game chạy.
+```
+
+```cpp
+static void GotoXY(const int &x, const int &y);
+//Khỏi giải thích nhỉ, hàm đi đến một vị trí quy định trong console.
+```
+
+```cpp
+static void SetText(const string &text, const int &x, const int &y);
+//Đi tới vị trí XY in chữ ra.
+```
+
+```cpp
+static void Choose(const int &x, const int &y);
+//Đi tới XY cài một con trỏ để cho người dùng biết đang chọn nút nào, vị trí XY này cũng dùng để giúp xác định người dùng muốn chọn chạy chức năng nào trong game.
+```
+
+```cpp
+static void Border(const int &width, const int &height, const int &x, const int &y);
+//Vẽ một border với 4 tham số như code.
+```
+
+```cpp
+static void Button(const string &text, const int &width, const int &height, const int &x, const int &y);
+//Vẽ một button với tham số text là tên button.
+```
+
+```cpp
+//Các methods có chữ "Menu" chủ yếu là vẽ giao diện, có thể k cần care.
+```
+
+```cpp
+static int ProcessMainMenu();
+//Xử lý trả về 1 trong 4 lựa chọn ngoài màn hình chính cho hàm main chạy lệnh tương ứng với lựa chọn đó.
+```
+
+```cpp
+static bool Accept();
+//Hàm này dùng nhiều, trong các lựa chọn sẽ có 2 nút (1 nút Back để quay về k chọn cái đó nữa, 1 nút Accept hay OK gì đó để tiếp tục chơi), thì bool này nếu true tức là tiếp tục, false là Back trở lại.
+```
